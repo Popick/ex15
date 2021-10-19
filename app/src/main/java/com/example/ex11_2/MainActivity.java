@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void go(View view) {
-        if (isNumeric(firstText.getText().toString()) == false){
+        if (isEmpty(firstText.getText().toString())){
             firstText.setError("Invalid input");
         }else{
-            if (isNumeric(changeText.getText().toString()) == false){
+            if (isEmpty(changeText.getText().toString())){
                 changeText.setError("Invalid input");
             }else{
-                si.putExtra("first",Integer.parseInt(firstText.getText().toString()));
-                si.putExtra("change",Integer.parseInt(changeText.getText().toString()));
+                si.putExtra("first",Double.parseDouble(firstText.getText().toString()));
+                si.putExtra("change",Double.parseDouble(changeText.getText().toString()));
                 si.putExtra("switch1",sW.isChecked());
                 startActivityForResult(si, 1);
             }

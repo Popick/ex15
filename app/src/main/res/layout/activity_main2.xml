@@ -67,14 +67,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="92" />
 
-            <TextView
-                android:id="@+id/textView8"
+            <Button
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="*2147483647 is maximum positive integer value that can be represented"
-                android:textAlignment="center"
-                android:textSize="12sp" />
+                android:layout_weight="5"
+                android:onClick="back"
+                android:text="Go Back" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="010" />
 
         </LinearLayout>
 
