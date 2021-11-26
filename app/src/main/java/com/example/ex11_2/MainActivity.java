@@ -1,5 +1,6 @@
 package com.example.ex11_2;
 
+
 import static android.text.TextUtils.isEmpty;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,22 +11,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 
+
 public class MainActivity extends AppCompatActivity {
+    /**
+     * @author        Etay Sabag
+     * @version       1.0
+     * @since         18/10/2021
+     *
+     * MainActivity class, the start screen of the app that receive the
+     * input and sends it to the second screen.
+     */
+
     EditText firstText,changeText;
     Intent si;
     Switch sW;
 
-    public static boolean isNumeric(String str)
-    {
-        if (isEmpty(str)){
-            return false;
-        }
-        for (char c : str.toCharArray())
-        {
-            if (!Character.isDigit(c)) return false;
-        }
-        return true;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void go(View view) {
+
+        /**
+         * Go function, sends you to the second screen with the input of the user and checking if the
+         * input is valid.
+         * <p> (<----- albert, what is the purpose of that?)
+         *
+         * @param     firstText  Description:    the object that linked to the input box of the
+         *                                       first item the user wants to enter in the series.
+         *
+         * @param     changeText Description:    the object that linked to the input box of the
+         *                                       difference or the multiplier in the series.
+         *
+         * @param     si         Description:    the intent.
+         *
+         * @return               Description:    None.
+         */
+
         if (isEmpty(firstText.getText().toString())){
             firstText.setError("Invalid input");
         }else{
@@ -54,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(si, 1);
             }
         }
-
     }
 
 
