@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MainActivity2 extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity2 extends AppCompatActivity implements AdapterView.OnItemLongClickListener, View.OnCreateContextMenuListener {
     Intent gi;
     double first, change, snval;
     boolean isGeo;
@@ -19,6 +20,7 @@ public class MainActivity2 extends AppCompatActivity implements AdapterView.OnIt
     String[] strList = new String[20];
     ListView lV;
     TextView x1, d, n, sn;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,11 @@ public class MainActivity2 extends AppCompatActivity implements AdapterView.OnIt
         x1 = (TextView) findViewById(R.id.firstText);
         d = (TextView) findViewById(R.id.dText);
         n = (TextView) findViewById(R.id.nText);
-        sn = (TextView) findViewById(R.id.snText);
         gi = getIntent();
         first = gi.getDoubleExtra("first", 1);
         change = gi.getDoubleExtra("change", 1);
         isGeo = gi.getBooleanExtra("switch1", false);
+
 
         x1.setText("x1 = " + first);
         d.setText("d = " + change);
@@ -46,7 +48,10 @@ public class MainActivity2 extends AppCompatActivity implements AdapterView.OnIt
         }
         ArrayAdapter<String> adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, strList);
         lV.setAdapter(adp);
-        lV.setOnItemClickListener(this);
+        lV.setOnItemLongClickListener(this);
+        lV.setOnCreateContextMenuListener(this);
+
+
     }
 
 
@@ -64,21 +69,51 @@ public class MainActivity2 extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (isGeo) {
-            snval = (int) (first * ((Math.pow(change, position + 1) - 1) / (change - 1)));
-            n.setText("n = " + (position + 1));
-            sn.setText("Sn = " + (snval));
-        } else {
-            snval = ((2 * first + (position) * change) / 2) * (position + 1);
-            n.setText("n = " + (position + 1));
-            sn.setText("Sn = " + (snval));
-        }
-
-    }
-
     public void back(View view) {
         finish();
     }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        pos = position;
+
+
+        return false;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+
+        menu.setHeaderTitle("Get information about:");
+        menu.add("index");
+        menu.add("sum");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        String oper=item.getTitle().toString();
+        if (oper.equals("sum")) {
+            if (isGeo) {
+                snval = (int) (first * ((Math.pow(change, pos + 1) - 1) / (change - 1)));
+                n.setText("sum:\n" + (snval));
+            } else {
+                snval = ((2 * first + (pos) * change) / 2) * (pos + 1);
+                n.setText("sum:\n" + (snval));
+
+            }
+            return true;
+        }
+        else if (oper.equals("index")) {
+            if (isGeo) {
+                n.setText("index:\n" + (pos + 1));
+            } else {
+                n.setText("index:\n" + (pos + 1));
+            }
+
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
 }

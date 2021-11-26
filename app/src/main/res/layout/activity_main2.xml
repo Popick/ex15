@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="X1="
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/dText"
@@ -44,23 +45,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="d="
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/nText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="n="
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/snText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Sn="
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="match_parent"
